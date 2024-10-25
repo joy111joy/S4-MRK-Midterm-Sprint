@@ -1,6 +1,5 @@
-package com.keyin;
+package com.keyin.domain.Passenger;
 
-import com.keyin.domain.Passenger;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

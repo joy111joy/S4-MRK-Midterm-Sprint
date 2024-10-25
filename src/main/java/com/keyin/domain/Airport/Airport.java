@@ -1,36 +1,40 @@
-package com.keyin.domain;
+package com.keyin.domain.Airport;
 
+import com.keyin.domain.Aircraft.Aircraft;
+import com.keyin.domain.City.City;
 import jakarta.persistence.*;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Entity
 public class Airport {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long airportId;
+
     private String name;
-    private static String IATA_code;
+    private String IATA_code;  // Removed static
 
     @ManyToOne
     @JoinColumn(name = "cityId")
     private City city;
 
     @ManyToMany
+    @JoinTable(
+            name = "airport_aircraft",
+            joinColumns = @JoinColumn(name = "airport_id"),
+            inverseJoinColumns = @JoinColumn(name = "aircraft_id")
+    )
     private List<Aircraft> aircraft;
 
-
+    // No-args constructor
+    public Airport() {
+    }
 
     public Airport(Long airportId, String name, String IATA_code) {
         this.airportId = airportId;
         this.name = name;
         this.IATA_code = IATA_code;
-    }
-
-    public static void IATA_code() {
     }
 
     public long getAirportId() {
@@ -57,20 +61,19 @@ public class Airport {
         this.IATA_code = IATA_code;
     }
 
-    @Repository
-    public static interface AirportRepository extends JpaRepository<Airport, Long> {
-        @Query("SELECT a.city.province, COUNT(a) FROM Airport a GROUP BY a.city.province HAVING COUNT(a) > 1")
-        List<Object[]> findProvincesWithMultipleAirports();
-
+    public City getCity() {
+        return city;
     }
 
-    @Repository
-    public static interface CityRepository extends JpaRepository<City, Long> {
-        @Query("SELECT c.province, SUM(c.population), COUNT(a) FROM City c LEFT JOIN c.airports a GROUP BY c.province HAVING SUM(c.population) BETWEEN 900000 AND 1100000")
-        List<Object[]> findProvincesWithPopulationAndAirports();
+    public void setCity(City city) {
+        this.city = city;
+    }
 
-        @Query("SELECT c.name, c.province, c.population, SUM(c2.population) as provincePopulation FROM City c JOIN City c2 ON c.province = c2.province WHERE EXISTS (SELECT 1 FROM Airport a WHERE a.city = c) GROUP BY c.name, c.province, c.population")
-        List<Object[]> findCityProvincePopulationComparison();
+    public List<Aircraft> getAircraft() {
+        return aircraft;
+    }
 
+    public void setAircraft(List<Aircraft> aircraft) {
+        this.aircraft = aircraft;
     }
 }

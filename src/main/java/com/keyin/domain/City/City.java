@@ -1,7 +1,7 @@
-package com.keyin.domain;
+package com.keyin.domain.City;
 
+import com.keyin.domain.Airport.Airport;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -9,37 +9,36 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
+
     private String name;
     private String city;
-    private static String province;
+    private String province;  // Removed static
     private int city_pop;
-    private static int province_pop;
+    private int province_pop;  // Removed static
 
-    @OneToMany(mappedBy = "cityId")
+    @OneToMany(mappedBy = "city")  // Changed to match the field in Airport
     private List<Airport> airports;
 
-    public City( Long cityId, String name, String city, String province, int city_pop, int province_pop) {
+    // No-args constructor
+    public City() {
+    }
+
+    public City(Long cityId, String name, String city, String province, int city_pop, int province_pop) {
         this.cityId = cityId;
         this.name = name;
         this.city = city;
-        City.province = province;
+        this.province = province;  // Changed to instance variable
         this.city_pop = city_pop;
-        City.province_pop = province_pop;
-
-}
-
-    public static void province() {
+        this.province_pop = province_pop;  // Changed to instance variable
     }
 
-    public static void province_pop() {
-    }
-
-    public Long gecCityId() {
+    // Corrected method name
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(Long cityid) {
-        this.cityId = cityid;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getName() {
@@ -63,7 +62,7 @@ public class City {
     }
 
     public void setProvince(String province) {
-        City.province = province;
+        this.province = province;  // Changed to instance variable
     }
 
     public int getCity_pop() {
@@ -79,7 +78,14 @@ public class City {
     }
 
     public void setProvince_pop(int province_pop) {
-        this.province_pop = province_pop;
+        this.province_pop = province_pop;  // Changed to instance variable
+    }
+
+    public List<Airport> getAirports() {
+        return airports;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
     }
 }
-

@@ -1,6 +1,5 @@
-package com.keyin.domain;
+package com.keyin.domain.Aircraft;
 
-import com.keyin.domain.Aircraft;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
