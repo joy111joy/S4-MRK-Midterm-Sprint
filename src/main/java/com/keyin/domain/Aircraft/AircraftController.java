@@ -1,6 +1,5 @@
 package com.keyin.domain.Aircraft;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,18 @@ public class AircraftController {
         return aircraftService.addAircraft(aircraft);
     }
 
-    @DeleteMapping("/api/aircraft/{id}")
+    @PatchMapping("/{id}")
+    public ResponseEntity<Aircraft> updateAircraft(@PathVariable Long id, @RequestBody Aircraft updatedAircraft) {
+        Optional<Aircraft> existingAircraft = aircraftService.getAircraftById(id);
+        if (existingAircraft.isPresent()) {
+            Aircraft updated = aircraftService.updateAircraft(id, updatedAircraft);
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAircraft(@PathVariable Long id) {
         Optional<Aircraft> aircraft = aircraftService.getAircraftById(id);
         if (aircraft.isPresent()) {

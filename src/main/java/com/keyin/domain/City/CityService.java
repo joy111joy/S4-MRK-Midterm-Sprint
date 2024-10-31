@@ -1,5 +1,6 @@
 package com.keyin.domain.City;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,25 @@ public class CityService {
 
     public City addCity(City city) {
         return cityRepository.save(city);
+    }
+
+    public City updateCity(Long id, City updatedCity) {
+        return cityRepository.findById(id).map(existingCity -> {
+            // Only update fields if they're not null in the request
+            if (updatedCity.getName() != null) {
+                existingCity.setName(updatedCity.getName());
+            }
+            if (updatedCity.getProvince() != null) {
+                existingCity.setProvince(updatedCity.getProvince());
+            }
+            if (updatedCity.getCityPopulation() != 0) { // Assuming 0 means 'not provided'
+                existingCity.setCityPopulation(updatedCity.getCityPopulation());
+            }
+            if (updatedCity.getProvincePopulation() != 0) { // Assuming 0 means 'not provided'
+                existingCity.setProvincePopulation(updatedCity.getProvincePopulation());
+            }
+            return cityRepository.save(existingCity);
+        }).orElseThrow(() -> new EntityNotFoundException("City not found"));
     }
 
     public void deleteCity(Long id) {

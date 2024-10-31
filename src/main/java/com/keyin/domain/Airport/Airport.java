@@ -1,6 +1,7 @@
 package com.keyin.domain.Airport;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.keyin.domain.Aircraft.Aircraft;
 import com.keyin.domain.City.City;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "airportId")
 public class Airport {
 
     @Id
@@ -18,18 +20,16 @@ public class Airport {
     private String IATA_code;
 
     @ManyToOne
-    @JoinColumn(name = "cityId", nullable = false) // Set nullable as per your business logic
-    @JsonIgnore // Prevent recursive serialization
-
+    @JoinColumn(name = "cityId", nullable = false)
     private City city;
 
-    @ManyToMany(cascade = CascadeType.ALL) // Adjust as necessary
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "airport_aircraft",
             joinColumns = @JoinColumn(name = "airport_id"),
             inverseJoinColumns = @JoinColumn(name = "aircraft_id")
     )
-    private List<Aircraft> aircraft = new ArrayList<>(); // Initialize to avoid NullPointerException
+    private List<Aircraft> aircraft = new ArrayList<>();
 
     // Constructors
     public Airport() {

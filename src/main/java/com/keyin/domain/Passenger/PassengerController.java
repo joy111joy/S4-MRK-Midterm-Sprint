@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/passenger")
@@ -23,7 +24,7 @@ public class PassengerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Passenger> getAircraftById(@PathVariable Long id) {
+    public ResponseEntity<Passenger> getPassengerById(@PathVariable Long id) {  // Corrected method name to getPassengerById
         return passengerService.getPassengerById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -34,8 +35,19 @@ public class PassengerController {
         return passengerService.addPassenger(passenger);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Passenger> updatePassenger(@PathVariable Long id, @RequestBody Passenger updatedPassenger) {
+        Optional<Passenger> existingPassenger = passengerService.getPassengerById(id);
+        if (existingPassenger.isPresent()) {
+            Passenger updated = passengerService.updatePassenger(id, updatedPassenger);  // Calls the service's update method
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCity(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePassenger(@PathVariable Long id) {  // Corrected method name to deletePassenger
         passengerService.deletePassenger(id);
         return ResponseEntity.noContent().build();
     }

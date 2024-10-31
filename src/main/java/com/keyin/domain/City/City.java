@@ -1,12 +1,14 @@
 package com.keyin.domain.City;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.keyin.domain.Airport.Airport;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cityId")
 public class City {
 
     @Id
@@ -19,9 +21,7 @@ public class City {
     private int provincePopulation;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL) // Cascade if needed
-    @JsonManagedReference // Manage the serialization of the relationship
-
-    private List<Airport> airports = new ArrayList<>(); // Initialize to avoid NullPointerException
+    private List<Airport> airports = new ArrayList<>();
 
     // Constructors
     public City() {

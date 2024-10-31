@@ -1,11 +1,11 @@
 package com.keyin.domain.Airport;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/airports")
@@ -33,6 +33,17 @@ public class AirportController {
     @PostMapping
     public Airport addAirport(@RequestBody Airport airport) {
         return airportService.addAirport(airport);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Airport> updateAirport(@PathVariable Long id, @RequestBody Airport updatedAirport) {
+        Optional<Airport> existingAirport = airportService.getAirportById(id);
+        if (existingAirport.isPresent()) {
+            Airport updated = airportService.updateAirport(id, updatedAirport);
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")

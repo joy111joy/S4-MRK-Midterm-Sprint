@@ -1,6 +1,5 @@
 package com.keyin.domain.Airport;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,28 @@ public class AirportService {
 
     public Airport addAirport(Airport airport) {
         return airportRepository.save(airport);
+    }
+
+    public Airport updateAirport(Long id, Airport updatedAirport) {
+        return airportRepository.findById(id)
+                .map(existingAirport -> {
+                    // Update fields only if they are not null in the request
+                    if (updatedAirport.getName() != null) {
+                        existingAirport.setName(updatedAirport.getName());
+                    }
+                    if (updatedAirport.getIATA_code() != null) {
+                        existingAirport.setIATA_code(updatedAirport.getIATA_code());
+                    }
+                    if (updatedAirport.getCity() != null) {
+                        existingAirport.setCity(updatedAirport.getCity());
+                    }
+                    if (updatedAirport.getAircraft() != null && !updatedAirport.getAircraft().isEmpty()) {
+                        existingAirport.setAircraft(updatedAirport.getAircraft());
+                    }
+
+                    return airportRepository.save(existingAirport);
+                })
+                .orElseThrow(() -> new RuntimeException("Airport not found with id " + id));
     }
 
     public void deleteAirport(Long id) {
