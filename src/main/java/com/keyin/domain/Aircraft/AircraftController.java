@@ -51,9 +51,9 @@ public class AircraftController {
         Optional<Aircraft> aircraft = aircraftService.getAircraftById(id);
         if (aircraft.isPresent()) {
             aircraftService.deleteAircraft(id);
-            return ResponseEntity.noContent().build();  // 204 No Content for successful deletion
+            return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();  // 404 Not Found if the aircraft doesn't exist
+            return ResponseEntity.notFound().build();
         }
     }
 

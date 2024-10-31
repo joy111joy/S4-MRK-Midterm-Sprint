@@ -9,22 +9,22 @@ import java.util.List;
 public class Aircraft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long aircraftId;  // Use Long instead of long for JPA compatibility
+    private Long aircraftId;
     private String airline;
     private String model;
     private int capacity;
 
-    @ManyToMany(mappedBy = "aircraft") // Change to match the field name in Passenger
+    @ManyToMany(mappedBy = "aircraft")
     private List<Passenger> passengers;
 
-    @ManyToMany(mappedBy = "aircraft") // Change to match the field name in Airport if applicable
+    @ManyToMany(mappedBy = "aircraft")
     private List<Airport> airports;
 
-    // No-args constructor for JPA
+
     public Aircraft() {
     }
 
-    // Constructor with parameters
+
     public Aircraft(Long aircraftId, String airline, String model, int capacity) {
         this.aircraftId = aircraftId;
         this.airline = airline;
@@ -33,7 +33,7 @@ public class Aircraft {
     }
 
     public Long getAircraftId() {
-        return aircraftId;  // Return type should match the field type
+        return aircraftId;
     }
 
     public void setAircraftId(Long aircraftId) {
@@ -64,7 +64,7 @@ public class Aircraft {
         this.capacity = capacity;
     }
 
-    // Optional: Getters and Setters for passengers and airports
+
     public List<Passenger> getPassengers() {
         return passengers;
     }

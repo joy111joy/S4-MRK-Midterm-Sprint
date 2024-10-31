@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"com.keyin.domain.City", "com.keyin.domain.Airport", "com.keyin.domain.Aircraft", "com.keyin.domain.Passenger"})  // Entity scanning
+@EntityScan(basePackages = {"com.keyin.domain.City", "com.keyin.domain.Airport", "com.keyin.domain.Aircraft", "com.keyin.domain.Passenger"})
 public class AirportServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(AirportServerApplication.class, args);
@@ -17,7 +17,7 @@ public class AirportServerApplication {
         try {
             String serviceType = "_airportserver._tcp.local.";
             String serviceName = "AirportServer";
-            int port = 8080; // Your server port
+            int port = 8080;
 
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
             ServiceInfo serviceInfo = ServiceInfo.create(serviceType, serviceName, port, "Airport Server");

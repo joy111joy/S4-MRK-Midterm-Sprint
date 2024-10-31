@@ -15,15 +15,14 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
 
-    private String name;  // City name
-    private String province; // Province name
+    private String name;
+    private String province;
     private int cityPopulation;
     private int provincePopulation;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL) // Cascade if needed
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<Airport> airports = new ArrayList<>();
 
-    // Constructors
     public City() {
     }
 
@@ -34,7 +33,6 @@ public class City {
         this.provincePopulation = provincePopulation;
     }
 
-    // Getters and Setters
     public Long getCityId() {
         return cityId;
     }

@@ -31,7 +31,7 @@ public class AircraftService {
     public Aircraft updateAircraft(Long id, Aircraft updatedAircraft) {
         return aircraftRepository.findById(id)
                 .map(existingAircraft -> {
-                    // Update fields only if they are not null in the request
+
                     if (updatedAircraft.getAirline() != null) {
                         existingAircraft.setAirline(updatedAircraft.getAirline());
                     }

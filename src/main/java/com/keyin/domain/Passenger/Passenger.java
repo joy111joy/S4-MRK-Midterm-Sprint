@@ -29,12 +29,10 @@ public class Passenger {
 //    )
     private List<Aircraft> aircraft;
 
-    // No-args constructor for JPA
     public Passenger() {
     }
 
-    // Constructor with parameters
-    public Passenger(Long passengerId, String firstName, String lastName, String email, String phoneNumber) {
+    public  Passenger(Long passengerId, String firstName, String lastName, String email, String phoneNumber) {
         this.passengerId = passengerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +40,6 @@ public class Passenger {
         this.phoneNumber = phoneNumber;
     }
 
-    // Corrected getter method name
     public Long getPassengerId() {
         return passengerId;
     }
