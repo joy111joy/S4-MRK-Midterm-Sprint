@@ -45,7 +45,7 @@ public class AircraftService {
                     if (updatedAircraft.getPassengers() != null && !updatedAircraft.getPassengers().isEmpty()) {
                         existingAircraft.setPassengers(updatedAircraft.getPassengers());
                     }
-                    if (updatedAircraft.getStatus() != null && !updatedAircraft.getStatus().isEmpty()) {
+                    if (updatedAircraft.getStatus() != null) {
                         existingAircraft.setStatus(updatedAircraft.getStatus());
                     }
 
