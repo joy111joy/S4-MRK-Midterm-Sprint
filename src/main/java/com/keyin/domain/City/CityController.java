@@ -56,4 +56,5 @@ public class CityController {
         cityService.deleteCity(id);
         return ResponseEntity.noContent().build();
     }
+
 }

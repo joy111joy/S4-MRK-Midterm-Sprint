@@ -20,7 +20,7 @@ public class AircraftController {
 
     @GetMapping
     public List<Aircraft> getAllAircraft() {
-        return aircraftService.getAllAircrafts();
+        return aircraftService.getAllAircraft();
     }
 
     @GetMapping("/{id}")

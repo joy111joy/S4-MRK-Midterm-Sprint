@@ -3,6 +3,8 @@ package com.keyin.domain.Aircraft;
 import com.keyin.domain.Airport.Airport;
 import com.keyin.domain.Passenger.Passenger;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -13,6 +15,8 @@ public class Aircraft {
     private String airline;
     private String model;
     private int capacity;
+    private LocalDate lastServiceDate;
+    private String status;
 
     @ManyToMany(mappedBy = "aircraft")
     private List<Passenger> passengers;
@@ -25,11 +29,13 @@ public class Aircraft {
     }
 
 
-    public Aircraft(Long aircraftId, String airline, String model, int capacity) {
+    public Aircraft(Long aircraftId, String airline, String model, int capacity, String status) {
+
         this.aircraftId = aircraftId;
         this.airline = airline;
         this.model = model;
         this.capacity = capacity;
+        this.status = "Active";
     }
 
     public Long getAircraftId() {
@@ -65,14 +71,27 @@ public class Aircraft {
     }
 
 
+
+    public LocalDate getLastServiceDate() {
+        return lastServiceDate;
+    }
+
+
     public List<Passenger> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(List<Passenger> passengers) {
-        this.passengers = passengers;
+    public void setLastServiceDate(LocalDate lastServiceDate) {
+        this.lastServiceDate = lastServiceDate;
     }
 
+    public String getStatus () {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public List<Airport> getAirports() {
         return airports;
     }
@@ -80,4 +99,13 @@ public class Aircraft {
     public void setAirports(List<Airport> airports) {
         this.airports = airports;
     }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+
 }
+
+
+

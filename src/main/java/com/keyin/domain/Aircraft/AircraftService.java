@@ -3,6 +3,7 @@ package com.keyin.domain.Aircraft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class AircraftService {
         this.aircraftRepository = aircraftRepository;
     }
 
-    public List<Aircraft> getAllAircrafts() {
+    public List<Aircraft> getAllAircraft() {
         return aircraftRepository.findAll();
     }
 
@@ -44,6 +45,10 @@ public class AircraftService {
                     if (updatedAircraft.getPassengers() != null && !updatedAircraft.getPassengers().isEmpty()) {
                         existingAircraft.setPassengers(updatedAircraft.getPassengers());
                     }
+                    if (updatedAircraft.getStatus() != null) {
+                        existingAircraft.setStatus(updatedAircraft.getStatus());
+                    }
+
                     if (updatedAircraft.getAirports() != null && !updatedAircraft.getAirports().isEmpty()) {
                         existingAircraft.setAirports(updatedAircraft.getAirports());
                     }
@@ -56,4 +61,32 @@ public class AircraftService {
     public void deleteAircraft(Long id) {
         aircraftRepository.deleteById(id);
     }
+
+    public LocalDate NextServiceDate(Aircraft aircraft) {
+        if (aircraft.getLastServiceDate() == null) {
+            return LocalDate.now().plusDays(30);
+        } else {
+            return aircraft.getLastServiceDate().plusDays(30);
+        }
+    }
+
+    public void updateLastServiceDate(long aircraftId, LocalDate serviceDate) {
+        Optional<Aircraft> optionalAircraft = aircraftRepository.findById(aircraftId);
+        if (optionalAircraft.isPresent()) {
+            Aircraft aircraft = optionalAircraft.get();
+            aircraft.setLastServiceDate(serviceDate);
+            aircraftRepository.save(aircraft);
+        }
+    }
+
+    public Aircraft updateAircraftStatus(Long id, String status) {
+        Optional<Aircraft> optionalAircraft = aircraftRepository.findById(id);
+        if (optionalAircraft.isPresent()) {
+            Aircraft aircraft = optionalAircraft.get();
+            aircraft.setStatus(status);
+            return aircraftRepository.save(aircraft);
+        }
+        return null; // Or throw an exception
+    }
+
 }

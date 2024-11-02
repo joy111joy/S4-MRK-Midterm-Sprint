@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3dea507-29ef-4ecf-849c-620ec41dd9b1" name="Changes" comment="mDNS working. Connection between machines on same network">
+    <list default="true" id="d3dea507-29ef-4ecf-849c-620ec41dd9b1" name="Changes" comment="Passenger PATCH Fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/keyin/domain/Aircraft/Aircraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/keyin/domain/Aircraft/Aircraft.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/keyin/domain/Aircraft/AircraftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/keyin/domain/Aircraft/AircraftController.java" afterDir="false" />
@@ -71,7 +71,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.AirportServerApplication (1).executor": "Run",
     "Spring Boot.AirportServerApplication.executor": "Run",
-    "git-widget-placeholder": "PatchMethods",
+    "git-widget-placeholder": "NoConflicts",
+
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -144,13 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1730082880060</updated>
     </task>
-    <task id="LOCAL-00004" summary="mDNS working. Connection between machines on same network">
+    <task id="LOCAL-00004" summary="Passenger PATCH Fix">
       <option name="closed" value="true" />
-      <created>1730336353184</created>
+      <created>1730582699342</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1730336353184</updated>
+      <updated>1730582699342</updated>
+
     </task>
     <option name="localTasksCounter" value="5" />
     <servers />
@@ -173,7 +175,8 @@
     <MESSAGE value="Init Commit" />
     <MESSAGE value="Got server running again" />
     <MESSAGE value="mDNS working. Connection between machines on same network" />
-    <option name="LAST_COMMIT_MESSAGE" value="mDNS working. Connection between machines on same network" />
+    <MESSAGE value="Passenger PATCH Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Passenger PATCH Fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
