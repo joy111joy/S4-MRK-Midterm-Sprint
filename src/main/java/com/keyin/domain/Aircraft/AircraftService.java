@@ -3,6 +3,7 @@ package com.keyin.domain.Aircraft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,9 @@ public class AircraftService {
     }
 
     public Aircraft addAircraft(Aircraft aircraft) {
+        if (aircraft.getLastServiceDate() == null) {
+            aircraft.setLastServiceDate(LocalDate.now());
+        }
         return aircraftRepository.save(aircraft);
     }
 
@@ -47,6 +51,12 @@ public class AircraftService {
                     if (updatedAircraft.getAirports() != null && !updatedAircraft.getAirports().isEmpty()) {
                         existingAircraft.setAirports(updatedAircraft.getAirports());
                     }
+                    if (updatedAircraft.getStatus() != null) {
+                        existingAircraft.setStatus(updatedAircraft.getStatus());
+                    }
+                    if (updatedAircraft.getLastServiceDate() != null) {
+                        existingAircraft.setLastServiceDate(updatedAircraft.getLastServiceDate());
+                    }
 
                     return aircraftRepository.save(existingAircraft);
                 })
@@ -55,5 +65,14 @@ public class AircraftService {
 
     public void deleteAircraft(Long id) {
         aircraftRepository.deleteById(id);
+    }
+
+    public void updateLastServiceDate(long aircraftId, LocalDate serviceDate) {
+        Optional<Aircraft> optionalAircraft = aircraftRepository.findById(aircraftId);
+        if (optionalAircraft.isPresent()) {
+            Aircraft aircraft = optionalAircraft.get();
+            aircraft.setLastServiceDate(serviceDate); // This will use today's date if serviceDate is null
+            aircraftRepository.save(aircraft);
+        }
     }
 }

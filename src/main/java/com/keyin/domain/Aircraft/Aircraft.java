@@ -3,6 +3,8 @@ package com.keyin.domain.Aircraft;
 import com.keyin.domain.Airport.Airport;
 import com.keyin.domain.Passenger.Passenger;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -14,6 +16,7 @@ public class Aircraft {
     private String model;
     private int capacity;
     private String status;
+    private LocalDate lastServiceDate;
 
     @ManyToMany(mappedBy = "aircraft")
     private List<Passenger> passengers;
@@ -64,6 +67,21 @@ public class Aircraft {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDate getLastServiceDate() {
+        return lastServiceDate;
+    }
+    public void setLastServiceDate(LocalDate lastServiceDate) {
+        // Set to current date if the provided date is null
+        this.lastServiceDate = (lastServiceDate != null) ? lastServiceDate : LocalDate.now();
     }
 
 

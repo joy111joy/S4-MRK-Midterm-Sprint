@@ -35,6 +35,7 @@ public class AircraftController {
         return aircraftService.addAircraft(aircraft);
     }
 
+
     @PatchMapping("/{id}")
     public ResponseEntity<Aircraft> updateAircraft(@PathVariable Long id, @RequestBody Aircraft updatedAircraft) {
         Optional<Aircraft> existingAircraft = aircraftService.getAircraftById(id);
@@ -44,6 +45,11 @@ public class AircraftController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @PatchMapping("/{id}/lastServiceDate")
+    public ResponseEntity<Void> updateLastServiceDate(@PathVariable Long id) {
+        aircraftService.updateLastServiceDate(id, null);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
