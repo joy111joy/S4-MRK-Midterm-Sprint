@@ -47,6 +47,9 @@ public class PassengerService {
                     if (updatedPassenger.getAircraft() != null && !updatedPassenger.getAircraft().isEmpty()) {
                         existingPassenger.setAircraft(updatedPassenger.getAircraft());
                     }
+                    if (updatedPassenger.getAirportsVisited() != null) {
+                        existingPassenger.setAirportsVisited(updatedPassenger.getAirportsVisited());
+                    }
 
                     return passengerRepository.save(existingPassenger);
                 })
