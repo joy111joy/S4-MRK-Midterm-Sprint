@@ -13,6 +13,7 @@ public class Aircraft {
     private String airline;
     private String model;
     private int capacity;
+    private String status;
 
     @ManyToMany(mappedBy = "aircraft")
     private List<Passenger> passengers;
@@ -30,6 +31,7 @@ public class Aircraft {
         this.airline = airline;
         this.model = model;
         this.capacity = capacity;
+        this.status = status;
     }
 
     public Long getAircraftId() {
@@ -63,6 +65,7 @@ public class Aircraft {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
 
 
     public List<Passenger> getPassengers() {

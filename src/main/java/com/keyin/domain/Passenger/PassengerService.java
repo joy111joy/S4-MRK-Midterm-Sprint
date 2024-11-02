@@ -40,14 +40,14 @@ public class PassengerService {
                     if (updatedPassenger.getEmail() != null) {
                         existingPassenger.setEmail(updatedPassenger.getEmail());
                     }
-                    if (updatedPassenger.getPhoneNumber() != null) {
-                        existingPassenger.setPhoneNumber(updatedPassenger.getPhoneNumber());
-                    }
                     if (updatedPassenger.getCity() != null) {
                         existingPassenger.setCity(updatedPassenger.getCity());
                     }
                     if (updatedPassenger.getAircraft() != null && !updatedPassenger.getAircraft().isEmpty()) {
                         existingPassenger.setAircraft(updatedPassenger.getAircraft());
+                    }
+                    if (updatedPassenger.getAirportsVisited() != null) {
+                        existingPassenger.setAirportsVisited(updatedPassenger.getAirportsVisited());
                     }
 
                     return passengerRepository.save(existingPassenger);
@@ -59,4 +59,5 @@ public class PassengerService {
     public void deletePassenger(Long id) {
         passengerRepository.deleteById(id);
     }
+
 }

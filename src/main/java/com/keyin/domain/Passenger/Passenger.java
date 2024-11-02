@@ -15,29 +15,31 @@ public class Passenger {
     private String firstName;
     private String lastName;
     private String email;
-    private String phoneNumber;
+    @ElementCollection
+    private List<String> airportsVisited;
+
 
     @ManyToOne
     @JoinColumn(name = "cityId")
     private City city;
 
     @ManyToMany
-//    @JoinTable(
-//            name = "passenger_aircraft",
-//            joinColumns = @JoinColumn(name = "passenger_id"),
-//            inverseJoinColumns = @JoinColumn(name = "aircraft_id")
-//    )
+    @JoinTable(
+            name = "passenger_aircraft",
+            joinColumns = @JoinColumn(name = "passenger_id"),
+            inverseJoinColumns = @JoinColumn(name = "aircraft_id")
+    )
     private List<Aircraft> aircraft;
 
     public Passenger() {
     }
 
-    public  Passenger(Long passengerId, String firstName, String lastName, String email, String phoneNumber) {
+    public  Passenger(Long passengerId, String firstName, String lastName, String email, String airports_visited) {
         this.passengerId = passengerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.airportsVisited = airportsVisited;
     }
 
     public Long getPassengerId() {
@@ -72,12 +74,12 @@ public class Passenger {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+   public List<String> getAirportsVisited() {
+        return airportsVisited;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAirportsVisited(List<String> airportsVisited) {
+        this.airportsVisited = airportsVisited;
     }
 
     public City getCity() {

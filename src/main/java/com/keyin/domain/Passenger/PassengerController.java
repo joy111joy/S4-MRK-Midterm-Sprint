@@ -30,6 +30,7 @@ public class PassengerController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
     @PostMapping
     public Passenger addPassenger(@RequestBody Passenger passenger) {
         return passengerService.addPassenger(passenger);
