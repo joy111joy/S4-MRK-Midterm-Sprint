@@ -30,6 +30,7 @@ public class Aircraft {
 
 
     public Aircraft(Long aircraftId, String airline, String model, int capacity, String status) {
+
         this.aircraftId = aircraftId;
         this.airline = airline;
         this.model = model;
@@ -74,6 +75,7 @@ public class Aircraft {
     public LocalDate getLastServiceDate() {
         return lastServiceDate;
     }
+
 
     public List<Passenger> getPassengers() {
         return passengers;

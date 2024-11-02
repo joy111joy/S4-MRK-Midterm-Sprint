@@ -38,6 +38,7 @@ public class Passenger {
 
     // Constructor with parameters
     public Passenger(Long passengerId, String firstName, String lastName, String email, List<String> airportsVisited) {
+
         this.passengerId = passengerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,7 +46,7 @@ public class Passenger {
         this.airportsVisited = airportsVisited;
     }
 
-    // Getters and Setters
+
     public Long getPassengerId() {
         return passengerId;
     }

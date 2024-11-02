@@ -31,7 +31,6 @@ public class PassengerService {
     public Passenger updatePassenger(Long id, Passenger updatedPassenger) {
         return passengerRepository.findById(id)
                 .map(existingPassenger -> {
-                    // Update fields only if they are not null in the request
                     if (updatedPassenger.getFirstName() != null) {
                         existingPassenger.setFirstName(updatedPassenger.getFirstName());
                     }

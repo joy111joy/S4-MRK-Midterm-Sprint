@@ -31,7 +31,6 @@ public class AirportService {
     public Airport updateAirport(Long id, Airport updatedAirport) {
         return airportRepository.findById(id)
                 .map(existingAirport -> {
-                    // Update fields only if they are not null in the request
                     if (updatedAirport.getName() != null) {
                         existingAirport.setName(updatedAirport.getName());
                     }
