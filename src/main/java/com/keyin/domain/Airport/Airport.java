@@ -31,7 +31,6 @@ public class Airport {
     )
     private List<Aircraft> aircraft = new ArrayList<>();
 
-    // Constructors
     public Airport() {
     }
 
@@ -41,7 +40,6 @@ public class Airport {
         this.city = city;
     }
 
-    // Getters and Setters
     public Long getAirportId() {
         return airportId;
     }

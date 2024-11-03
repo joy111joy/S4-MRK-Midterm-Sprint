@@ -1,5 +1,6 @@
 package com.keyin.domain.Passenger;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.keyin.domain.Aircraft.Aircraft;
 import com.keyin.domain.City.City;
 import jakarta.persistence.*;
@@ -20,7 +21,7 @@ public class Passenger {
     @ElementCollection
     private List<String> airportsVisited;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "cityId")
     private City city;
 
@@ -32,11 +33,9 @@ public class Passenger {
     )
     private List<Aircraft> aircraft;
 
-    // No-args constructor
     public Passenger() {
     }
 
-    // Constructor with parameters
     public Passenger(Long passengerId, String firstName, String lastName, String email, List<String> airportsVisited) {
         this.passengerId = passengerId;
         this.firstName = firstName;
@@ -45,7 +44,6 @@ public class Passenger {
         this.airportsVisited = airportsVisited;
     }
 
-    // Getters and Setters
     public Long getPassengerId() {
         return passengerId;
     }

@@ -31,17 +31,16 @@ public class CityService {
 
     public City updateCity(Long id, City updatedCity) {
         return cityRepository.findById(id).map(existingCity -> {
-            // Only update fields if they're not null in the request
             if (updatedCity.getName() != null) {
                 existingCity.setName(updatedCity.getName());
             }
             if (updatedCity.getProvince() != null) {
                 existingCity.setProvince(updatedCity.getProvince());
             }
-            if (updatedCity.getCityPopulation() != 0) { // Assuming 0 means 'not provided'
+            if (updatedCity.getCityPopulation() != 0) {
                 existingCity.setCityPopulation(updatedCity.getCityPopulation());
             }
-            if (updatedCity.getProvincePopulation() != 0) { // Assuming 0 means 'not provided'
+            if (updatedCity.getProvincePopulation() != 0) {
                 existingCity.setProvincePopulation(updatedCity.getProvincePopulation());
             }
             return cityRepository.save(existingCity);

@@ -1,6 +1,7 @@
 package com.keyin.domain.City;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.keyin.domain.Airport.Airport;
 import jakarta.persistence.*;
@@ -15,15 +16,18 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
 
-    private String name;  // City name
-    private String province; // Province name
+    private String name;
+    private String province;
     private int cityPopulation;
     private int provincePopulation;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL) // Cascade if needed
+
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
+
     private List<Airport> airports = new ArrayList<>();
 
-    // Constructors
     public City() {
     }
 
@@ -34,7 +38,6 @@ public class City {
         this.provincePopulation = provincePopulation;
     }
 
-    // Getters and Setters
     public Long getCityId() {
         return cityId;
     }
@@ -79,7 +82,9 @@ public class City {
         return airports;
     }
 
+
     public void setAirports(List<Airport> airports) {
         this.airports = airports;
     }
+
 }

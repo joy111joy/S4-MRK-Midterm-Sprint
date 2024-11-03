@@ -86,7 +86,7 @@ public class AircraftService {
             aircraft.setStatus(status);
             return aircraftRepository.save(aircraft);
         }
-        return null; // Or throw an exception
+        return null;
     }
 
 }

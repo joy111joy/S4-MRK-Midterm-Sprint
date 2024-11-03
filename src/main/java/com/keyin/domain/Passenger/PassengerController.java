@@ -24,7 +24,7 @@ public class PassengerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Passenger> getPassengerById(@PathVariable Long id) {  // Corrected method name to getPassengerById
+    public ResponseEntity<Passenger> getPassengerById(@PathVariable Long id) {
         return passengerService.getPassengerById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -39,7 +39,7 @@ public class PassengerController {
     public ResponseEntity<Passenger> updatePassenger(@PathVariable Long id, @RequestBody Passenger updatedPassenger) {
         Optional<Passenger> existingPassenger = passengerService.getPassengerById(id);
         if (existingPassenger.isPresent()) {
-            Passenger updated = passengerService.updatePassenger(id, updatedPassenger);  // Calls the service's update method
+            Passenger updated = passengerService.updatePassenger(id, updatedPassenger);
             return ResponseEntity.ok(updated);
         } else {
             return ResponseEntity.notFound().build();
@@ -47,7 +47,7 @@ public class PassengerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePassenger(@PathVariable Long id) {  // Corrected method name to deletePassenger
+    public ResponseEntity<Void> deletePassenger(@PathVariable Long id) {
         passengerService.deletePassenger(id);
         return ResponseEntity.noContent().build();
     }
