@@ -19,6 +19,5 @@ public interface CityRepository extends JpaRepository<City, Long> {
     List<Object[]> findProvincesWithMultipleAirports();
 
 
-       /* @Query ("SELECT city.province, city.population FROM City  join Aiport airport.name WHERE population > 1000000 AND airport < (CASE WHEN population > 5000000 THEN 3 WHEN population > 2000000 THEN 2 ELSE 1 END)");
-    List<Object[]> findProvincesWithPopulationAndAirports2();*/
+
     }

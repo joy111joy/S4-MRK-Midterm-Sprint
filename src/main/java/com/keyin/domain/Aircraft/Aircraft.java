@@ -29,11 +29,13 @@ public class Aircraft {
     }
 
 
-    public Aircraft(Long aircraftId, String airline, String model, int capacity) {
+    public Aircraft(Long aircraftId, String airline, String model, int capacity, String status) {
+
         this.aircraftId = aircraftId;
         this.airline = airline;
         this.model = model;
         this.capacity = capacity;
+        this.status = "Active";
     }
 
     public Long getAircraftId() {
@@ -74,6 +76,7 @@ public class Aircraft {
         return lastServiceDate;
     }
 
+
     public List<Passenger> getPassengers() {
         return passengers;
     }
@@ -87,11 +90,7 @@ public class Aircraft {
     }
 
     public void setStatus(String status) {
-        if (isValidStatus(status)) {
-            this.status = status;
-        } else {
-            throw new IllegalArgumentException("Invalid status: " + status);
-        }
+        this.status = status;
     }
     public List<Airport> getAirports() {
         return airports;
@@ -99,11 +98,6 @@ public class Aircraft {
 
     public void setAirports(List<Airport> airports) {
         this.airports = airports;
-    }
-
-    private boolean isValidStatus(String status) {
-        return status != null && (status.equals("ACTIVE") ||
-                status.equals("DECOMMISSIONED") || status.equals("SOLD"));
     }
 
     public void setPassengers(List<Passenger> passengers) {
